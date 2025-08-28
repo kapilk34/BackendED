@@ -11,7 +11,7 @@ const Stripe = require("stripe");
 
 const app = express();
 
-app.use(cors({ origin: "http://localhost:5173" })); // allow only frontend URL
+app.use(cors({ origin: "*" })); // allow only frontend URL
 // or app.use(cors()); // allow all origins (for testing)
 
 app.use(express.json());

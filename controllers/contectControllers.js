@@ -1,4 +1,6 @@
 const nodemailer = require("nodemailer");
+const dotenv = require("dotenv");
+dotenv.config();
 
 const handleContactForm = async (req, res) => {
   const { name, email, country, queryType, message } = req.body;

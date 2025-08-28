@@ -5,7 +5,8 @@ const User = require("../models/User");
 const sendEmail = require("../utils/sendEmail");
 const authMiddleware = require("../middleware/auth");
 const { welcomeTemplate, loginAlertTemplate } = require("../utils/emailTemplates");
-
+const dotenv = require("dotenv");
+dotenv.config();
 const router = express.Router();
 
 // SIGNUP

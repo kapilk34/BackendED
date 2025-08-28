@@ -8,6 +8,7 @@ const multer = require("multer")
 const Stripe = require("stripe");
 
 
+
 const app = express();
 
 app.use(cors({ origin: "http://localhost:5173" })); // allow only frontend URL

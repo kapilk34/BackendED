@@ -2,9 +2,9 @@ const COMPANY = process.env.APP_NAME || "Edunique Mind Private Limited";
 const SUPPORT_URL = process.env.SUPPORT_URL || "#";
 const dotenv = require("dotenv");
 dotenv.config();
-const LOGO_URL =
-  process.env.LOGO_URL ||
-  "https://gvu57hqxi3.ufs.sh/f/FOd38ztMu1UwmasSWIcW8p1VwSr6YDJTLjBZXz3x49d205ya"; 
+// const LOGO_URL =
+//   process.env.LOGO_URL ||
+//   "https://gvu57hqxi3.ufs.sh/f/FOd38ztMu1UwmasSWIcW8p1VwSr6YDJTLjBZXz3x49d205ya"; 
 
 // Base wrapper for consistent branding
 function baseLayout({ preheader = "Edunique Mind", title = "", bodyHtml = "" }) {
@@ -44,9 +44,9 @@ function baseLayout({ preheader = "Edunique Mind", title = "", bodyHtml = "" }) 
         <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:560px;background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.06);" class="card">
           <!-- Header -->
           <tr>
-            <td align="center" style="padding:24px 24px 8px;">
-              <img src="${LOGO_URL}" width="100" height="80" alt="${COMPANY}" style="display:block;border:0;line-height:100%;outline:none;text-decoration:none;">
-            </td>
+            // <td align="center" style="padding:24px 24px 8px;">
+            //   <img src="${LOGO_URL}" width="100" height="80" alt="${COMPANY}" style="display:block;border:0;line-height:100%;outline:none;text-decoration:none;">
+            // </td>
           </tr>
 
           ${title ? `

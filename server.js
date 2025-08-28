@@ -47,10 +47,7 @@ app.post("/send-mail", upload.single("documents"), async (req, res) => {
 app.use("/api/payment", paymentRoutes);
 app.use("/api/contact", contactRoutes);
 
-// 404 handler (always return JSON)
-app.use((req, res) => {
-  res.status(404).json({ success: false, message: "Route not found" });
-});
+
 
 // Error handler (always return JSON)
 app.use((err, req, res, next) => {

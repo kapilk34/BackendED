@@ -2,9 +2,9 @@ const COMPANY = process.env.APP_NAME || "Edunique Mind Private Limited";
 const SUPPORT_URL = process.env.SUPPORT_URL || "#";
 const dotenv = require("dotenv");
 dotenv.config();
-// const LOGO_URL =
-//   process.env.LOGO_URL ||
-//   "https://gvu57hqxi3.ufs.sh/f/FOd38ztMu1UwmasSWIcW8p1VwSr6YDJTLjBZXz3x49d205ya"; 
+const LOGO_URL =
+  process.env.LOGO_URL ||
+  "https://gvu57hqxi3.ufs.sh/f/FOd38ztMu1UwmasSWIcW8p1VwSr6YDJTLjBZXz3x49d205ya"; 
 
 // Base wrapper for consistent branding
 function baseLayout({ preheader = "Edunique Mind", title = "", bodyHtml = "" }) {

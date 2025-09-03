@@ -22,7 +22,7 @@ const upload = multer({ storage: storage });
 
 
 connectDB();
-app.use("/api/auth", authRoutes);
+// app.use("/api/auth", authRoutes);
 
 const paymentRoutes = require("./routes/paymentRoutes");
 const contactRoutes = require("./routes/contectRoutes");
@@ -46,6 +46,7 @@ app.post("/send-mail", upload.single("documents"), async (req, res) => {
 // Routes
 app.use("/api/payment", paymentRoutes);
 app.use("/api/contact", contactRoutes);
+app.use("/", authRoutes);
 
 
 

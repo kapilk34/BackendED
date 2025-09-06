@@ -33,7 +33,7 @@ const handleContactForm = async (req, res) => {
     await transporter.sendMail({
       from: `"EdUnique Minds" <${process.env.EMAIL_USER}>`,
       to: email,
-      subject: "✅ Thanks for contacting EdUnique Minds",
+      subject: "Thanks for contacting EdUnique Minds",
       html: `
         <h3>Hi ${name},</h3>
         <p>Thanks for reaching out to us regarding <b>${queryType}</b>.</p>
@@ -49,7 +49,7 @@ const handleContactForm = async (req, res) => {
 
     res.status(200).json({ success: true, message: "Form submitted & email sent" });
   } catch (err) {
-    console.error("❌ Error sending email:", err);
+    console.error("Error sending email:", err);
     res.status(500).json({ success: false, error: "Something went wrong" });
   }
 };

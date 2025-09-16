@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const Stripe = require("stripe");
 const sendMail = require("../utils/paymentMail");
@@ -6,39 +7,26 @@ const router = express.Router();
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 // @route   POST /api/payment/pay
-// @desc    Process payment
+// @desc    Process Stripe payment
 router.post("/pay", async (req, res) => {
   try {
-    const { amount, cardNumber, expMonth, expYear, cvc, cardName, email } = req.body;
+    const { amount, paymentMethodId, email } = req.body;
 
-    if (!amount || !cardNumber || !expMonth || !expYear || !cvc || !cardName || !email) {
+    if (!amount || !paymentMethodId || !email) {
       return res.status(400).json({ success: false, message: "All fields are required" });
     }
 
-    // Create payment method
-    const paymentMethod = await stripe.paymentMethods.create({
-      type: "card",
-      card: {
-        number: cardNumber,
-        exp_month: expMonth,
-        exp_year: expYear,
-        cvc: cvc,
-      },
-      billing_details: {
-        name: cardName,
-        email: email,
-      },
-    });
-
-    // Create payment intent
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amount * 100, // Stripe expects cents
       currency: "usd",
-      payment_method: paymentMethod.id,
+      payment_method: paymentMethodId,
       confirm: true,
+      automatic_payment_methods: {
+        enabled: true,
+        allow_redirects: "never",
+      },
     });
 
-    // Send confirmation email
     await sendMail(
       email,
       "Payment Confirmation",
@@ -52,7 +40,37 @@ router.post("/pay", async (req, res) => {
     });
   } catch (error) {
     console.error("❌ Payment error:", error.message);
-    res.status(500).json({ success: false, message: error.message });
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// @route   POST /api/payment/paypal
+// @desc    Process PayPal payment
+router.post("/paypal", async (req, res) => {
+  try {
+    const { amount, email } = req.body;
+
+    if (!amount || !email) {
+      return res.status(400).json({ success: false, message: "All fields are required" });
+    }
+
+    // Simulate PayPal payment processing
+    const transactionId = `PAYPAL-${Date.now()}`;
+
+    await sendMail(
+      email,
+      "PayPal Payment Confirmation",
+      `✅ Your PayPal payment of $${amount} was successful! Transaction ID: ${transactionId}`
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "PayPal payment successful",
+      transactionId,
+    });
+  } catch (error) {
+    console.error("❌ PayPal payment error:", error.message);
+    res.status(500).json({ success: false, error: error.message });
   }
 });
 
